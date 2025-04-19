@@ -92,7 +92,7 @@ Pull requests and suggestions are welcome. Let's build better docs together!
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-MIT © 2025 [Saurabh Dhanaji Doke](https://github.com/111saurabh)
+MIT © 2025 [Saurabh Doke](https://github.com/111saurabh)
 
 
 
