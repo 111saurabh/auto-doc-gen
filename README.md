@@ -1,0 +1,102 @@
+#  auto-doc-gen
+
+**Generate rich documentation for your TypeScript code in Markdown and HTML — right from VS Code.**
+
+---
+
+## Features
+
+-  Parses TypeScript files or folders
+-  Supports:
+  - Function declarations
+  - Arrow functions
+  - JSDoc comments (`@param`, `@returns`)
+-  Outputs clean and structured:
+  - `DOCS.md`
+  - `docs.html`
+-  VS Code integrated — works via Command Palette
+
+---
+
+##  Installation
+
+1. Clone this repository  
+   ```bash
+   git clone https://github.com/your-username/auto-doc-gen
+   cd auto-doc-gen
+   ```
+2. Open it in VS Code
+3. Press `F5` to launch the extension in a new Extension Development Host window
+
+---
+
+##  Usage
+
+1. Open the Command Palette (`Ctrl+Shift+P`)
+2. Type `Generate Docs` and select **auto-doc-gen: Generate Docs**
+3. Select a `.ts` file or a folder containing TypeScript files
+4. Done! You’ll see `DOCS.md` and `docs.html` created in your workspace
+
+---
+
+##  Example
+
+**Input:**
+
+```ts
+/**
+ * Adds two numbers
+ * @param a - First number
+ * @param b - Second number
+ * @returns Sum of a and b
+ */
+const add = (a: number, b: number): number => {
+  return a + b;
+}
+```
+
+**Output (Markdown):**
+```markdown
+##  Function: `add`
+**Description:** Adds two numbers  
+**Parameters:**
+- a - First number
+- b - Second number  
+**Returns:** Sum of a and b
+
+```ts
+const add = (a: number, b: number): number => {
+  return a + b;
+}
+```
+```
+
+---
+
+##  Roadmap
+
+- [x] Support function & arrow function docs
+- [ ] Support for classes & interfaces
+- [ ] Add configuration options (output path, style)
+- [ ] Publish on VS Code Marketplace
+
+---
+
+##  Contributing
+
+Pull requests and suggestions are welcome. Let's build better docs together! 
+
+---
+
+##  License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+MIT © 2025 [Saurabh Dhanaji Doke](https://github.com/111saurabh)
+
+
+
+
+## Version History
+
+- **0.0.1** - Initial release with support for function & arrow function documentation generation.
