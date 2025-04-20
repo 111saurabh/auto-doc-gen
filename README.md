@@ -11,6 +11,10 @@
   - Function declarations
   - Arrow functions
   - JSDoc comments (`@param`, `@returns`)
+  - User interface
+  - enum
+  - class 
+    
 -  Outputs clean and structured:
   - `DOCS.md`
   - `docs.html`
@@ -76,9 +80,10 @@ const add = (a: number, b: number): number => {
 ##  Roadmap
 
 - [x] Support function & arrow function docs
-- [ ] Support for classes & interfaces
+- [x] Support for classes & interfaces
+- [x] Publish on VS Code Marketplace
 - [ ] Add configuration options (output path, style)
-- [ ] Publish on VS Code Marketplace
+
 
 ---
 
@@ -100,3 +105,4 @@ MIT © 2025 [Saurabh Doke](https://github.com/111saurabh)
 ## Version History
 
 - **0.0.1** - Initial release with support for function & arrow function documentation generation.
+= **1.1.0** - Added support for user interface, enum, class etc. File selection improved.

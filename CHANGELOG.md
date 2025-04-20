@@ -16,3 +16,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - First working version of the auto-doc-gen extension.
 - Function and arrow function documentation generation in Markdown and HTML.
 - Support for JSDoc comments like `@param` and `@returns`.
+
+## [1.1.0] - 2024-04-21
+### Added
+- Support for documenting Classes (constructors, properties, methods)
+- Interface documentation generation
+- Enum member documentation
+- Type alias support
+### Improved
+- Better HTML formatting
+- Enhanced Markdown output structure

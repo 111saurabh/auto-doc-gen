@@ -4,16 +4,16 @@ import fs from "fs";
 import path from "path";
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('Congratulations, your extension "auto-doc-gen" is now active!');
+  console.log('🎉 Extension "auto-doc-gen" is now active!');
 
   const disposable = vscode.commands.registerCommand('auto-doc-gen.generateDocs', async () => {
-    // Prompt the user to select a file or folder
     const inputPath = await vscode.window.showOpenDialog({
       canSelectMany: false,
       openLabel: 'Select a TypeScript file or folder',
-      canSelectFolders: true,  // Allow folder selection
+      canSelectFolders: true,
+      canSelectFiles: true,
       filters: {
-        'TypeScript': ['ts'],
+        'TypeScript Files': ['ts', 'tsx'],
         'All Files': ['*']
       }
     });
@@ -24,7 +24,11 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     const pathToProcess = inputPath[0].fsPath;
-    let markdown = "#  Documentation\n\n";
+    const outputDir = fs.statSync(pathToProcess).isDirectory() 
+      ? pathToProcess 
+      : path.dirname(pathToProcess);
+
+    let markdown = "# 📘 Documentation\n\n";
     let html = `
     <!DOCTYPE html>
     <html lang="en">
@@ -36,15 +40,24 @@ export function activate(context: vscode.ExtensionContext) {
         code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
         pre { background: #f9f9f9; padding: 1rem; border: 1px solid #ddd; border-radius: 5px; }
         .section { margin-bottom: 2rem; }
+        .property-list { margin-left: 1.5rem; }
       </style>
     </head>
     <body>
     <h1>📘 Documentation</h1>
     `;
 
+    const project = new Project();
+    let parsedFileCount = 0;
+
     const parseFile = (filePath: string) => {
-      const project = new Project();
-      const sourceFile = project.addSourceFileAtPath(filePath);
+      const sourceFile = project.addSourceFileAtPathIfExists(filePath);
+      if (!sourceFile) {
+        vscode.window.showWarningMessage(`⚠️ Could not parse file: ${filePath}`);
+        return;
+      }
+
+      parsedFileCount++;
 
       // Function Declarations
       sourceFile.getFunctions().forEach(fn => {
@@ -120,7 +133,139 @@ export function activate(context: vscode.ExtensionContext) {
         }
       });
 
-      // Repeat for other declarations (interfaces, enums, types)
+      // Classes
+      sourceFile.getClasses().forEach(cls => {
+        const className = cls.getName();
+        const docs = cls.getJsDocs();
+        const description = docs.map(doc => doc.getComment()).join("\n");
+        
+        markdown += `## 🏛 Class: \`${className}\`\n`;
+        html += `<div class="section"><h2>Class: <code>${className}</code></h2>`;
+        
+        if (description) {
+          markdown += `**Description:** ${description}\n`;
+          html += `<p><strong>Description:</strong> ${description}</p>`;
+        }
+
+        // Constructor
+        cls.getConstructors().forEach(ctor => {
+          const params = ctor.getParameters().map(p => ({
+            name: p.getName(),
+            type: p.getType().getText()
+          }));
+          
+          markdown += `\n### 🔨 Constructor\n`;
+          html += `<h3>Constructor</h3>`;
+          
+          if (params.length) {
+            markdown += `**Parameters:**\n${params.map(p => `- \`${p.name}\` (${p.type})`).join("\n")}\n`;
+            html += `<ul class="property-list">${params.map(p => `<li><code>${p.name}</code> (${p.type})</li>`).join("")}</ul>`;
+          }
+        });
+
+        // Properties
+        const properties = cls.getProperties();
+        if (properties.length > 0) {
+          markdown += `\n**Properties:**\n`;
+          html += `<h3>Properties</h3><ul class="property-list">`;
+          properties.forEach(prop => {
+            const propName = prop.getName();
+            const propType = prop.getType().getText();
+            markdown += `- \`${propName}\` (${propType})\n`;
+            html += `<li><code>${propName}</code> (${propType})</li>`;
+          });
+          html += `</ul>`;
+        }
+
+        // Methods
+        cls.getMethods().forEach(method => {
+          const methodName = method.getName();
+          const returnType = method.getReturnType().getText();
+          const methodDocs = method.getJsDocs();
+          const methodDesc = methodDocs.map(doc => doc.getComment()).join("\n");
+          
+          markdown += `\n### 📋 Method: \`${methodName}()\` → ${returnType}\n`;
+          html += `<div class="method-section"><h3>Method: <code>${methodName}()</code> → ${returnType}</h3>`;
+          
+          if (methodDesc) {
+            markdown += `${methodDesc}\n`;
+            html += `<p>${methodDesc}</p>`;
+          }
+          
+          html += `</div>`;
+        });
+
+        markdown += `\n\n`;
+        html += `</div>`;
+      });
+
+      // Interfaces
+      sourceFile.getInterfaces().forEach(intf => {
+        const interfaceName = intf.getName();
+        const docs = intf.getJsDocs();
+        const description = docs.map(doc => doc.getComment()).join("\n");
+        
+        markdown += `## 📜 Interface: \`${interfaceName}\`\n`;
+        html += `<div class="section"><h2>Interface: <code>${interfaceName}</code></h2>`;
+        
+        if (description) {
+          markdown += `**Description:** ${description}\n`;
+          html += `<p><strong>Description:</strong> ${description}</p>`;
+        }
+
+        // Properties
+        intf.getProperties().forEach(prop => {
+          const propName = prop.getName();
+          const propType = prop.getType().getText();
+          markdown += `- \`${propName}\`: ${propType}\n`;
+          html += `<p><code>${propName}</code>: ${propType}</p>`;
+        });
+
+        markdown += `\n`;
+        html += `</div>`;
+      });
+
+      // Enums
+      sourceFile.getEnums().forEach(enumDecl => {
+        const enumName = enumDecl.getName();
+        const docs = enumDecl.getJsDocs();
+        const description = docs.map(doc => doc.getComment()).join("\n");
+        
+        markdown += `## 🔢 Enum: \`${enumName}\`\n`;
+        html += `<div class="section"><h2>Enum: <code>${enumName}</code></h2>`;
+        
+        if (description) {
+          markdown += `**Description:** ${description}\n`;
+          html += `<p><strong>Description:</strong> ${description}</p>`;
+        }
+
+        enumDecl.getMembers().forEach(member => {
+          markdown += `- \`${member.getName()}\`\n`;
+          html += `<p><code>${member.getName()}</code></p>`;
+        });
+
+        markdown += `\n`;
+        html += `</div>`;
+      });
+
+      // Type Aliases
+      sourceFile.getTypeAliases().forEach(typeAlias => {
+        const aliasName = typeAlias.getName();
+        const docs = typeAlias.getJsDocs();
+        const description = docs.map(doc => doc.getComment()).join("\n");
+        const typeText = typeAlias.getText();
+        
+        markdown += `## 🏷 Type Alias: \`${aliasName}\`\n`;
+        html += `<div class="section"><h2>Type Alias: <code>${aliasName}</code></h2>`;
+        
+        if (description) {
+          markdown += `**Description:** ${description}\n`;
+          html += `<p><strong>Description:</strong> ${description}</p>`;
+        }
+
+        markdown += `\n\`\`\`ts\n${typeText}\n\`\`\`\n\n`;
+        html += `<pre><code>${typeText}</code></pre></div>`;
+      });
     };
 
     const parseFolder = (folderPath: string) => {
@@ -135,7 +280,7 @@ export function activate(context: vscode.ExtensionContext) {
             return;
           }
           parseFolder(fullPath);
-        } else if (fullPath.endsWith(".ts")) {
+        } else if (fullPath.endsWith(".ts") || fullPath.endsWith(".tsx")) {
           parseFile(fullPath);
         }
       });
@@ -153,11 +298,32 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    // Saving files
-    fs.writeFileSync("DOCS.md", markdown);
-    fs.writeFileSync("docs.html", html + "</body></html>");
+    if (parsedFileCount === 0) {
+      vscode.window.showWarningMessage("⚠️ No TypeScript/TSX files found or parsed.");
+      return;
+    }
 
-    vscode.window.showInformationMessage("✅ Documentation generated: DOCS.md and docs.html");
+    // Write output files to the correct location
+    const mdPath = path.join(outputDir, "DOCS.md");
+    const htmlPath = path.join(outputDir, "docs.html");
+
+    try {
+      fs.writeFileSync(mdPath, markdown);
+      fs.writeFileSync(htmlPath, html + "</body>\n</html>");
+      
+      const openFile = "Open Documentation";
+      vscode.window.showInformationMessage(
+        `📄 Documentation generated in: ${outputDir}`,
+        openFile
+      ).then(choice => {
+        if (choice === openFile) {
+          vscode.env.openExternal(vscode.Uri.file(mdPath));
+          vscode.env.openExternal(vscode.Uri.file(htmlPath));
+        }
+      });
+    } catch (error) {
+      vscode.window.showErrorMessage(`❌ Failed to write documentation files: ${error}`);
+    }
   });
 
   context.subscriptions.push(disposable);
