@@ -2,7 +2,7 @@
   "name": "auto-doc-gen",
   "displayName": "Auto Doc Gen",
   "description": "Generate rich Markdown/HTML documentation from TypeScript code directly in VS Code. Supports functions, arrow functions, and JSDoc annotations.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "saurabhdoke",
   "engines": {
     "vscode": "^1.99.0"
