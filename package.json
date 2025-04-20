@@ -1,19 +1,43 @@
 {
   "name": "auto-doc-gen",
   "displayName": "Auto Doc Gen",
-  "description": "A VS Code extension for generating documentation from TypeScript code.",
+  "description": "Generate rich Markdown/HTML documentation from TypeScript code directly in VS Code. Supports functions, arrow functions, and JSDoc annotations.",
   "version": "0.1.0",
-  "publisher": "YourPublisher",
+  "publisher": "saurabhdoke",
   "engines": {
     "vscode": "^1.99.0"
   },
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/111saurabh/auto-doc-gen"
+  },
+  "bugs": {
+    "url": "https://github.com/111saurabh/auto-doc-gen/issues"
+  },
+  "homepage": "https://github.com/111saurabh/auto-doc-gen#readme",
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Other"
+  ],
+  "keywords": [
+    "typescript",
+    "documentation",
+    "markdown",
+    "html",
+    "jsdoc",
+    "automatic"
+  ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "auto-doc-gen.generateDocs",
-        "title": "Generate Documentation"
+        "title": "Generate Documentation",
+        "category": "Auto Doc Gen"
       }
     ]
   },
@@ -22,8 +46,10 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src",
-    "test": "vscode-test"
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "vscode-test run --extensionDevelopmentPath=.",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -37,6 +63,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "highlight.js": "^11.11.1",
     "ts-morph": "^25.0.1"
   }
 }
