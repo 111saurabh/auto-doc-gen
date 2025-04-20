@@ -54,7 +54,9 @@ export function activate(context: vscode.ExtensionContext) {
         const description = docs.map(doc => doc.getComment()).join("\n");
 
         markdown += `## 🔹 Function: \`${name}\`\n`;
-        if (description) markdown += `**Description:** ${description}\n`;
+        if (description) {
+          markdown += `**Description:** ${description}\n`;
+        }
         markdown += `\n\`\`\`ts\n${code}\n\`\`\`\n\n`;
 
         html += `
@@ -79,7 +81,9 @@ export function activate(context: vscode.ExtensionContext) {
 
           jsDocs.forEach((doc: any) => {
             const comment = doc.getComment();
-            if (comment) description = comment;
+            if (comment) {
+              description = comment;
+            }
 
             const tags = doc.getTags?.() || [];
             tags.forEach((tag: any) => {
@@ -94,9 +98,15 @@ export function activate(context: vscode.ExtensionContext) {
           });
 
           markdown += `## 🔹 Function: \`${name}\`\n`;
-          if (description) markdown += `**Description:** ${description}\n`;
-          if (params.length) markdown += `**Parameters:**\n${params.map(p => `- ${p}`).join("\n")}\n`;
-          if (returns) markdown += `**Returns:** ${returns}\n`;
+          if (description) {
+            markdown += `**Description:** ${description}\n`;
+          }
+          if (params.length) {
+            markdown += `**Parameters:**\n${params.map(p => `- ${p}`).join("\n")}\n`;
+          }
+          if (returns) {
+            markdown += `**Returns:** ${returns}\n`;
+          }
           markdown += `\n\`\`\`ts\n${code}\n\`\`\`\n\n`;
 
           html += `
@@ -121,7 +131,9 @@ export function activate(context: vscode.ExtensionContext) {
         const stats = fs.statSync(fullPath);
 
         if (stats.isDirectory()) {
-          if (item === "node_modules" || item.startsWith(".")) return;
+          if (item === "node_modules" || item.startsWith(".")) {
+            return;
+          }
           parseFolder(fullPath);
         } else if (fullPath.endsWith(".ts")) {
           parseFile(fullPath);
