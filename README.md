@@ -26,7 +26,7 @@
 
 1. Clone this repository  
    ```bash
-   git clone https://github.com/your-username/auto-doc-gen
+   git clone https://github.com/111saurabh/auto-doc-gen
    cd auto-doc-gen
    ```
 2. Open it in VS Code
