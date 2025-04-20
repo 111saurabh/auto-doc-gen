@@ -8,7 +8,7 @@
     "vscode": "^1.99.0"
   },
   "license": "MIT",
-  "icon": "https://raw.githubusercontent.com/111saurabh/auto-doc-gen/main/extension/icon.png",
+  "icon": "extension/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/111saurabh/auto-doc-gen"
