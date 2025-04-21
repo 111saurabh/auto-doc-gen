@@ -1,5 +1,12 @@
 #  auto-doc-gen
 
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/SaurabhDoke.auto-doc-gen?label=VS%20Code%20Marketplace&style=for-the-badge&logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=SaurabhDoke.auto-doc-gen)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/SaurabhDoke.auto-doc-gen?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=SaurabhDoke.auto-doc-gen)
+[![Rating](https://img.shields.io/visual-studio-marketplace/stars/SaurabhDoke.auto-doc-gen?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=SaurabhDoke.auto-doc-gen)
+
+Your awesome auto-doc-gen extension for VS Code...
+
+
 **Generate rich documentation for your TypeScript code in Markdown and HTML — right from VS Code.**
 
 ---
