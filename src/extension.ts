@@ -303,7 +303,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    // Write output files to the correct location
+    // Write output files to the correct location ;)
     const mdPath = path.join(outputDir, "DOCS.md");
     const htmlPath = path.join(outputDir, "docs.html");
 
