@@ -18,9 +18,13 @@ Your awesome auto-doc-gen extension for VS Code...
   - Function declarations
   - Arrow functions
   - JSDoc comments (`@param`, `@returns`)
-  - User interface
-  - enum
-  - class 
+  - Interfaces
+  - Enums
+  - Classes
+  - Constructor
+  - Properties
+  - Methods
+  - Type Aliases
     
 -  Outputs clean and structured:
   - `DOCS.md`
@@ -112,4 +116,4 @@ MIT © 2025 [Saurabh Doke](https://github.com/111saurabh)
 ## Version History
 
 - **0.0.1** - Initial release with support for function & arrow function documentation generation.
-= **1.1.0** - Added support for user interface, enum, class etc. File selection improved.
+- **1.1.0** - Added support for user interface, enum, class etc. File selection improved.
