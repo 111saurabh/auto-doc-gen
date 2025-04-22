@@ -117,3 +117,4 @@ MIT © 2025 [Saurabh Doke](https://github.com/111saurabh)
 
 - **0.0.1** - Initial release with support for function & arrow function documentation generation.
 - **1.1.0** - Added support for user interface, enum, class etc. File selection improved.
+- **1.1.3** - Added dark themed output with better visual representation

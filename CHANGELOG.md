@@ -23,6 +23,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Interface documentation generation
 - Enum member documentation
 - Type alias support
+
+## [1.1.2] - 2024-04-21
 ### Improved
 - Better HTML formatting
 - Enhanced Markdown output structure
+
+## [1.1.3]
+### Added
+- Dark themed output with better visual representation
