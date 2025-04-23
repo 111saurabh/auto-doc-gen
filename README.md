@@ -13,8 +13,8 @@ Your awesome auto-doc-gen extension for VS Code...
 
 ## Features
 
--  Parses TypeScript files or folders
--  Supports:
+- - Parses TypeScript files or folders
+- - Supports:->
   - Function declarations
   - Arrow functions
   - JSDoc comments (`@param`, `@returns`)
@@ -26,10 +26,10 @@ Your awesome auto-doc-gen extension for VS Code...
   - Methods
   - Type Aliases
     
--  Outputs clean and structured:
+- - Outputs clean and structured:
   - `DOCS.md`
   - `docs.html`
--  VS Code integrated — works via Command Palette
+- - VS Code integrated — works via Command Palette
 
 ---
 
@@ -50,7 +50,8 @@ Your awesome auto-doc-gen extension for VS Code...
 1. Open the Command Palette (`Ctrl+Shift+P`)
 2. Type `Generate Docs` and select **auto-doc-gen: Generate Docs**
 3. Select a `.ts` file or a folder containing TypeScript files
-4. Done! You’ll see `DOCS.md` and `docs.html` created in your workspace
+4. Select option which output file you want to see
+5. Done! You’ll see `DOCS.md` or `docs.html` as per choise created in your workspace
 
 ---
 
@@ -92,8 +93,10 @@ const add = (a: number, b: number): number => {
 
 - [x] Support function & arrow function docs
 - [x] Support for classes & interfaces
+- [x] Add 'Download as PDF' feature
 - [x] Publish on VS Code Marketplace
 - [ ] Add configuration options (output path, style)
+- [ ] Advanced Features...
 
 
 ---
@@ -118,3 +121,4 @@ MIT © 2025 [Saurabh Doke](https://github.com/111saurabh)
 - **0.0.1** - Initial release with support for function & arrow function documentation generation.
 - **1.1.0** - Added support for user interface, enum, class etc. File selection improved.
 - **1.1.3** - Added dark themed output with better visual representation
+- **1.2.0** - Added 'Download as PDF' feature in HTML output

@@ -29,6 +29,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Better HTML formatting
 - Enhanced Markdown output structure
 
-## [1.1.3]
+## [1.1.3] - 2024-04-21
 ### Added
 - Dark themed output with better visual representation
+
+## [1.2.0] - 2024-04-23
+### Added
+- Options for user :    "Open generated documentation in browser (HTML)",
+                        "Open generated documentation in Notepad (Markdown)",
+                        "Open both files",
+                        "Just show file locations where ther are created"
+- 'Download as PDF' button in browser
