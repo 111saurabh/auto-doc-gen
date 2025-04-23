@@ -11,6 +11,7 @@ export function parseFile(filePath: string, project: Project, docsContent: DocsC
     }
 
     docsContent.parsedFileCount++;
+    
 
     // Function Declarations...
     sourceFile.getFunctions().forEach(fn => {

@@ -7,7 +7,7 @@ export async function writeDocs(outputDir: string, markdown: string, html: strin
     const htmlPath = path.join(outputDir, "docs.html");
 
     try {
-        // Verify output directory exists
+        // Verify kro output directory exists
         if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true });
             console.log(`Created directory: ${outputDir}`);
@@ -41,10 +41,10 @@ export async function writeDocs(outputDir: string, markdown: string, html: strin
         // For file choice
         const choice = await vscode.window.showQuickPick(
             [
-                "Open HTML documentation (browser)",
-                "Open Markdown documentation",
+                "Open generated documentation in browser (HTML)",
+                "Open generated documentation in Notepad (Markdown)",
                 "Open both files",
-                "Just show file locations"
+                "Just show file locations where ther are created"
             ],
             {
                 placeHolder: "Documentation generated successfully. How would you like to view it?"
