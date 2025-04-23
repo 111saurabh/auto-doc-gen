@@ -51,7 +51,9 @@ Your awesome auto-doc-gen extension for VS Code...
 2. Type `Generate Docs` and select **auto-doc-gen: Generate Docs**
 3. Select a `.ts` file or a folder containing TypeScript files
 4. Select option which output file you want to see
-5. Done! You’ll see `DOCS.md` or `docs.html` as per choise created in your workspace
+5. Done! You’ll see `DOCS.md` or `docs.html` as per choice created in your workspace
+
+In case you don't have , Use this well-commented sample TypeScript file to test the extension: https://github.com/111saurabh/test-for-auto-doc-gen.git
 
 ---
 
