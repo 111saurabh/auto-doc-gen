@@ -23,12 +23,14 @@
     "Other"
   ],
   "keywords": [
-    "typescript",
     "documentation",
-    "markdown",
-    "html",
+    "vscode",
+    "typescript",
+    "ts-morph",
+    "auto-doc",
     "jsdoc",
-    "automatic"
+    "markdown",
+    "html"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
