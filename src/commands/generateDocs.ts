@@ -45,8 +45,28 @@ export function registerGenerateDocsCommand(context: vscode.ExtensionContext) {
     <style>
         ${HTML_STYLES}
     </style>
+    <script>
+        function downloadAsPDF() {
+            // Add a class to the body for print styling
+            document.body.classList.add('printing');
+            
+            // Use window.print() to open the print dialog
+            window.print();
+            
+            // Remove the class after printing
+            setTimeout(() => {
+                document.body.classList.remove('printing');
+            }, 100);
+        }
+    </script>
 </head>
 <body>
+    <button class="pdf-button" onclick="downloadAsPDF()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5v-2z" fill="currentColor"/>
+        </svg>
+        Download as PDF
+    </button>
     <h1> Documentation</h1>
 `,
             parsedFileCount: 0

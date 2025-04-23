@@ -31,4 +31,29 @@ export const HTML_STYLES = `
     h1, h2, h3 {
         color: #4CAF50;
     }
+    .pdf-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #2E7D32;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        transition: background-color 0.3s;
+    }
+    .pdf-button:hover {
+        background-color: #1B5E20;
+    }
+    @media print {
+        .pdf-button {
+            display: none;
+        }
+    }
 `;

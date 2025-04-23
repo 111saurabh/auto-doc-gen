@@ -52,11 +52,11 @@ export async function writeDocs(outputDir: string, markdown: string, html: strin
         );
 
         switch (choice) {
-            case "Open HTML documentation (browser)":
+            case "Open generated documentation in browser (HTML)":
                 await vscode.env.openExternal(vscode.Uri.file(htmlPath));
                 break;
                 
-            case "Open Markdown documentation":
+            case "Open generated documentation in Notepad (Markdown)":
                 await vscode.env.openExternal(vscode.Uri.file(mdPath));
                 break;
                 
